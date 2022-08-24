@@ -1,4 +1,4 @@
-<@extends('layouts.app')　　　　　　　　　　　　　　　　　　
+@extends('layouts.app')　　　　　　　　　　　　　　　　　　
 
 @section('content')
 <!DOCTYPE HTML>
@@ -12,15 +12,21 @@
         <link rel="stylesheet" href="/css/app.css">
     </head>
     <body>
-        <div class="content">
-            <div class="profile">
-                <h3>{{$user->name}}</h3>
-                <h3>{{$user->updated_at}}</h3>
-                <h3>{{$user->profile}}</h3>
-            <div class="posts">
-                <h3>{{$user->posts[0]->body}}</h3>
-            </div>
-            </div>
+        <div>
+            <form action="/places/serch" method="GET">
+                <input type="text" name="keyword" >
+                <input type="submit" value="検索">
+            </form>
+            
+            <form action="/places/serch" method="GET">
+                <select name="keyword">                          
+                    @foreach($prefectures as $prefecture)
+                        <option value="{{ $prefecture->name }}">{{ $prefecture->name }}</option>
+                    @endforeach
+                </select>
+                <input type="submit" value="検索">
+            </form>
+            
         </div>
         <div class="footer">
             <a href="/">戻る</a>

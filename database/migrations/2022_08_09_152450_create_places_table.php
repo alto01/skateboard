@@ -22,6 +22,7 @@ class CreatePlacesTable extends Migration
             $table->timestamps();
             $table->integer('user_id')->unsigned();
             $table->integer('tag_id')->unsigned();
+            $table->integer('prefecture_id')->unsigned();
             $table->softDeletes();
         });
     }

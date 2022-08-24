@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             PostsTableSeeder::class,
             TagsTableSeeder::class,
+            PrefecturesTableSeeder::class,
             ]);
         //$this->call(UsersTableSeeder::class);
     }

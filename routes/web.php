@@ -15,6 +15,9 @@ Auth::routes();
 
 Route::get('/', 'PostController@index')->middleware('auth');
 Route::get('/posts/create', 'PostController@create');
-Route::get('/posts/{post}', 'PostController@show');
-Route::get('/users/{user}', 'UserController@index');
+Route::get('/posts/{id}', 'PostController@show');
+Route::get('/users/{id}', 'UserController@index');
 Route::post('/posts', 'PostController@store');
+Route::get('/places', 'PlaceController@index');
+Route::get('/places/serch','PlaceController@serch');
+

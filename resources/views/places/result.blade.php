@@ -11,21 +11,17 @@
     </head>
     <body>
         <h1>Blog Name</h1>
-        [<a href='/posts/create'>create</a>]
-        [<a href='/places'>places</a>]
+     
         <div class='posts'>
-            @foreach ($posts as $post)
+            @foreach ($places as $place)
                 <div class='post'>
-                    <a href="/users/{{ $post->user->id }}">{{ $post->user->name }}</a>
-                    <p class='uptime'>{{$post->updated_at}}</p>
-                    <h2 class='body'>
-                        <a href="/posts/{{ $post->id }}">{{ $post->body }}</a>
-                    </h2>
+                    <p class='uptime1'>{{$place->prefecture}}</p>
+                    <p class='uptime'>{{$place->name}}</p>
                 </div>
             @endforeach
         </div>
-        <div class='paginate'>
-            {{ $posts->links() }}
+        <div class="footer">
+            <a href="/">戻る</a>
         </div>
     </body>
 </html>
