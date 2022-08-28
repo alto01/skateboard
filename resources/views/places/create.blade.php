@@ -12,10 +12,11 @@
        
     {{--  {{dd(\Auth::user()->id)}} --}}
 
-        <form action="/posts" method="POST" enctype="multipart/form-data" >
+        <form action="/places/store" method="POST" enctype="multipart/form-data" >
             @csrf
             <div class="body">
-                <h2>Body</h2>
+                <h2>名前</h2>
+                <input type="type" name="place[name]">
                 <textarea name="post[body]" placeholder="今日あった出来事"></textarea>
                 <input type="file" name="image">
                 <input type="hidden" name="post[user_id]" value={{\Auth::user()->id}} />

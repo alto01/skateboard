@@ -20,4 +20,6 @@ Route::get('/users/{id}', 'UserController@index');
 Route::post('/posts', 'PostController@store');
 Route::get('/places', 'PlaceController@index');
 Route::get('/places/serch','PlaceController@serch');
+Route::get('/places/create','PlaceController@create');
+Route::get('/places/store','PlaceController@store');
 

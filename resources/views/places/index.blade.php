@@ -26,6 +26,7 @@
                 </select>
                 <input type="submit" value="検索">
             </form>
+            [<a href='/places/create'>create</a>]
             
         </div>
         <div class="footer">

@@ -24,8 +24,13 @@ class PlaceController extends Controller
                 ->orwhere('name','LIKE',"%{$keyword}%")
                 ->orwhere('adress','LIKE',"%{$keyword}%");
         }
-
+        
         $places = $query->get();
+        
+        // $places=Place::whereHas('prefecture', function($query) use ($keyword){
+        //     $query ->where('name','LIKE',"%{$keyword}%");
+        // })->get();
+        
 
         return view('places/result')->with([
             'places' => $places,
@@ -33,5 +38,7 @@ class PlaceController extends Controller
             ]);
     }
     
-   
+   public function create(){
+       return view ('places/create');
+   }
 }
