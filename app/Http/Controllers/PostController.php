@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Storage;
 
 class PostController extends Controller
 {
@@ -22,7 +23,13 @@ class PostController extends Controller
     public function store(Request $request,Post $post)
     {
         $input = $request['post'];
+        $image = $request -> file('image');
+      
+        $path = Storage::disk('s3')->putFile('posts_image', $image, 'public');
+        $input['image']=Storage::disk('s3')->url($path);
+        
         $post -> fill($input) -> save();
+        
         return redirect ('/posts/'.$post->id);
     }
 }

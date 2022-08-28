@@ -10,6 +10,6 @@ class Prefecture extends Model
     
     public function places()
     {
-        return $this->hasMany('App\places');
+        return $this->hasMany('App\Place');
     }
 }

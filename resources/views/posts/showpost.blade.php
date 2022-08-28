@@ -15,7 +15,10 @@
         <div class="content">
             <div class="content__post">
                 <h3>{{$post->user->name}}</h3>
-                <p>{{ $post->body }}</p>    
+                <p>{{ $post->body }}</p>  
+                @if($post->image != null)
+                    <img src="{{ $post->image}}"　width="300" height="200">
+                @endif
                 <p>{{$post->updated_at}}</p>
             </div>
         </div>

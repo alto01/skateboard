@@ -21,6 +21,10 @@
                     <h2 class='body'>
                         <a href="/posts/{{ $post->id }}">{{ $post->body }}</a>
                     </h2>
+                    @if($post->image != null)
+                        <img src="{{ $post->image}}"　width="300" height="200">
+                    @endif
+                    <br>
                 </div>
             @endforeach
         </div>
