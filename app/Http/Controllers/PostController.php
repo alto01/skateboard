@@ -12,24 +12,31 @@ class PostController extends Controller
     {
         return view('posts/index')->with(['posts' => $post->getPaginateByLimit()]);
     }
+    
     public function show($id){
         $post = Post::find($id);
         return view('posts/showpost')->with(['post' => $post]);
     }
+    
     public function create()
     {
         return view('posts/create');
     }
+    
     public function store(Request $request,Post $post)
     {
         $input = $request['post'];
         $image = $request -> file('image');
-      
-        $path = Storage::disk('s3')->putFile('posts_image', $image, 'public');
-        $input['image']=Storage::disk('s3')->url($path);
+        
+        if ($image != null){
+            $path = Storage::disk('s3')->putFile('posts_image', $image, 'public');
+            $input['image']=Storage::disk('s3')->url($path);
+        }
         
         $post -> fill($input) -> save();
         
         return redirect ('/posts/'.$post->id);
     }
+    
+  
 }
