@@ -15,11 +15,15 @@ Auth::routes();
 
 Route::get('/', 'PostController@index')->middleware('auth');
 Route::get('/posts/create', 'PostController@create');
+Route::put('/users/{user}/update', 'UserController@update');
 Route::get('/posts/{id}', 'PostController@show');
 Route::get('/users/{id}', 'UserController@index');
+Route::get('/users/{id}/edit', 'UserController@edit');
 Route::post('/posts', 'PostController@store');
 Route::get('/places', 'PlaceController@index');
 Route::get('/places/serch','PlaceController@serch');
 Route::get('/places/create','PlaceController@create');
 Route::get('/places/store','PlaceController@store');
+Route::get('/posts/{id}/like', 'LikeController@like');
+Route::get('/posts/{id}/unlike', 'LikeController@unlike');
 

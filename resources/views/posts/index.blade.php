@@ -25,6 +25,13 @@
                         <img src="{{ $post->image}}"　width="300" height="200">
                     @endif
                     <br>
+                    <div class = 'like'>
+                        @if($post->is_liked_by_auth_user())
+                        <a href="/posts/{{$post->id}}/unlike" class="btn btn-success btn-sm">いいね<span class="badge">{{ $post->likes->count() }}</span></a>
+                        @else
+                        <a href="posts/{{$post->id}}/like" class="btn btn-secondary btn-sm">いいね<span class="badge">{{ $post->likes->count() }}</span></a>
+                        @endif
+                    </div>
                 </div>
             @endforeach
         </div>
