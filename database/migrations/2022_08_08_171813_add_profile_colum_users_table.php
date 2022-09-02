@@ -15,7 +15,7 @@ class AddProfileColumUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('profile', 200)->default('よろしくお願いします。');
-            $table->string('image', 100)->nullable();
+            $table->text('image')->nullable();
         });
     }
 

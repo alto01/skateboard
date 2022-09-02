@@ -17,7 +17,7 @@ class CreatePlacesTable extends Migration
             $table->increments('id');
             $table->string('name',100);
             $table->string('prefecture',100);
-            $table->string('image',100)->nullable();
+            $table->text('image')->nullable();
             $table->string('adress',100);
             $table->timestamps();
             $table->integer('user_id')->unsigned();

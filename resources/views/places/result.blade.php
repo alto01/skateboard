@@ -14,9 +14,13 @@
      
         <div class='posts'>
             @foreach ($places as $place)
-                <div class='post'>
-                    <p class='uptime1'>{{$place->prefecture}}</p>
-                    <p class='uptime'>{{$place->name}}</p>
+                <div class='place'>
+                    <p class='prefecture'>{{$place->prefecture}}</p>
+                    <a href="/places/{{ $place->id }}">{{$place->name}}</a>
+                    <p class='adress'>{{$place->adress}}</p>
+                    @if($place->image != null)
+                        <img src="{{ $place->image}}"　width="300" height="200">
+                    @endif
                 </div>
             @endforeach
         </div>

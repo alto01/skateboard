@@ -23,7 +23,11 @@ Route::post('/posts', 'PostController@store');
 Route::get('/places', 'PlaceController@index');
 Route::get('/places/serch','PlaceController@serch');
 Route::get('/places/create','PlaceController@create');
-Route::get('/places/store','PlaceController@store');
+Route::post('/places/store','PlaceController@store');
 Route::get('/posts/{id}/like', 'LikeController@like');
 Route::get('/posts/{id}/unlike', 'LikeController@unlike');
+Route::get('/places/{place}', 'PlaceController@show');
+Route::post('/users/{user}/follow', 'RelationshipController@follow');
+Route::post('/users/{user}/unfollow', 'RelationshipController@unfollow');
+
 

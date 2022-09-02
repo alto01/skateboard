@@ -15,8 +15,11 @@ class CreateRelationshipsTable extends Migration
     {
         Schema::create('relationships', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('follower_id')->unsigned();
-            $table->integer('followed_id')->unsigned();
+            $table->unsignedBigInteger('followed_id')->index();
+            $table->unsignedBigInteger('follower_id')->index();
+            $table->foreign('followed_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('follower_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
