@@ -2495,16 +2495,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['userId', 'defaultFollowed', 'defaultCount'],
+  props: ['userId', 'defaultFollowed', 'defaultFollowedCount', 'defaultFollowerCount'],
   data: function data() {
     return {
       followed: false,
-      followCount: 0
+      followedCount: 0,
+      followerCount: 0
     };
   },
   created: function created() {
     this.followed = this.defaultFollowed;
-    this.followCount = this.defaultCount;
+    this.followedCount = this.defaultFollowedCount;
+    this.followerCount = this.defaultFollowerCount;
   },
   methods: {
     follow: function follow(userId) {
@@ -2513,11 +2515,11 @@ __webpack_require__.r(__webpack_exports__);
       var url = "/users/".concat(userId, "/follow");
       axios.post(url).then(function (response) {
         _this.followed = true;
-        _this.followCount = response.data.followCount;
+        _this.followedCount = response.data.followedCount;
+        _this.followerCount = response.data.followerCount;
       })["catch"](function (error) {
         alert(error);
       });
-      console.log(this.followCount);
     },
     unfollow: function unfollow(userId) {
       var _this2 = this;
@@ -2525,7 +2527,8 @@ __webpack_require__.r(__webpack_exports__);
       var url = "/users/".concat(userId, "/unfollow");
       axios.post(url).then(function (response) {
         _this2.followed = false;
-        _this2.followCount = response.data.followCount;
+        _this2.followedCount = response.data.followedCount;
+        _this2.followerCount = response.data.followerCount;
       })["catch"](function (error) {
         alert(error);
       });
@@ -2593,7 +2596,7 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("span", {
+  return _c("div", [_c("span", [_vm._v("フォロワー" + _vm._s(_vm.followedCount) + " ")]), _vm._v(" "), _c("span", [_vm._v("フォロー" + _vm._s(_vm.followerCount) + " ")]), _vm._v(" "), _c("span", {
     staticClass: "float-right"
   }, [!_vm.followed ? _c("button", {
     staticClass: "btn-sm shadow-none border border-primary p-2",
@@ -2619,7 +2622,7 @@ var render = function render() {
     }
   }, [_c("i", {
     staticClass: "mr-1 fas fa-user-check"
-  }), _vm._v("フォロー中")])]);
+  }), _vm._v("フォロー中")])])]);
 };
 
 var staticRenderFns = [];

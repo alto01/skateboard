@@ -7,6 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Posts</title>
+        
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="/css/app.css">
@@ -15,13 +16,15 @@
     <body>
         
         <p class="edit">[<a href="/users/{{ $user->id }}/edit">edit</a>]</p>
+        @if(auth()->user()->id !== $user->id)
         
         <follow-component
         :user-id = "{{ json_encode($user->id) }}"
         :default-Followed = "{{ json_encode($defaultFollowed) }}"
-        :default-Count = "{{ json_encode($defaultCount) }}"
+        :default-Followed-Count = "{{ json_encode($defaultFollowedCount) }}"
+        :default-Follower-Count = "{{ json_encode($defaultFollowerCount) }}"
         ></follow-component>
-        
+        @endif
         <div class="content">
             <div class="profile">
                 <div class='user_name'>

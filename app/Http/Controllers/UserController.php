@@ -15,7 +15,8 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $follow = Relationship::where('follower_id', \Auth::user()->id)->where('followed_id', $id)->first();
-        $defaultCount = Relationship::where('follower_id', \Auth::user()->id)->get()->count();
+        $defaultFollowedCount = Relationship::where('followed_id', $id)->get()->count();
+        $defaultFollowerCount = Relationship::where('follower_id', $id)->get()->count();
         
         if(is_null($follow)){
             $defaultFollowed=false;
@@ -26,7 +27,8 @@ class UserController extends Controller
         return view('users/index')->with([
             'user' => $user,
             'defaultFollowed' =>$defaultFollowed,
-            'defaultCount' => $defaultCount
+            'defaultFollowedCount' => $defaultFollowedCount,
+            'defaultFollowerCount' => $defaultFollowerCount
         ]);
     }
     public function edit($id){
