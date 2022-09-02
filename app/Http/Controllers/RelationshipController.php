@@ -13,15 +13,22 @@ class RelationshipController extends Controller
             'follower_id' => \Auth::user()->id,
             'followed_id' => $user->id,
         ]);
-        $followCount = count(Relationship::where('followed_id', $user->id)->get();
-        return response()->json(['followCount' => $followCount]);
+        $followedCount = count(Relationship::where('followed_id', $user->id)->get());
+        $followerCount = count(Relationship::where('follower_id', $user->id)->get());
+        return response()->json([
+            'followedCount' => $followedCount,
+            'followerCount' => $followerCount,
+        ]);
     }
     
     public function unfollow(User $user) {
         $follow = Relationship::where('follower_id', \Auth::user()->id)->where('followed_id', $user->id)->first();
         $follow->delete();
-        $followCount = count(Relationship::where('followed_id', $user->id)->get());
-
-        return response()->json(['followCount' => $followCount]);
+        $followedCount = count(Relationship::where('followed_id', $user->id)->get());
+        $followerCount = count(Relationship::where('follower_id', $user->id)->get());
+        return response()->json([
+            'followedCount' => $followedCount,
+            'followerCount' => $followerCount,
+        ]);
     }
 }
