@@ -21,7 +21,8 @@ Route::get('/users/{id}', 'UserController@index');
 Route::get('/users/{id}/edit', 'UserController@edit');
 Route::post('/posts', 'PostController@store');
 Route::get('/places', 'PlaceController@index');
-Route::get('/places/serch','PlaceController@serch');
+Route::get('/places/serchPrefecture','PlaceController@serchPrefecture');
+Route::get('/places/serchKeyword','PlaceController@serchKeyword');
 Route::get('/places/create','PlaceController@create');
 Route::post('/places/store','PlaceController@store');
 Route::get('/posts/{id}/like', 'LikeController@like');
@@ -29,5 +30,6 @@ Route::get('/posts/{id}/unlike', 'LikeController@unlike');
 Route::get('/places/{place}', 'PlaceController@show');
 Route::post('/users/{user}/follow', 'RelationshipController@follow');
 Route::post('/users/{user}/unfollow', 'RelationshipController@unfollow');
+Route::delete('/posts/{post}','PostController@delete');
 
 

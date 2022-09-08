@@ -16,11 +16,17 @@
             <div class="content_place">
                 <h3>{{$place->user->name}}</h3>
                 <p>{{ $place->name }}</p> 
-                <p>{{ $place->adress }}</p>
+                <p id='adress'>{{ $place->adress }}</p>
+                
                 @if($place->image != null)
                     <img src="{{ $place->image}}"　width="300" height="200">
                 @endif
                 <p>{{$place->updated_at}}</p>
+                <div id="map" style="height:500px"> 
+                    <script src="{{ asset('/js/map_result.js') }}"></script> 
+                    <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyDDbD9frOed-MhwtpaBxeDIvtCvGA2wVBo&callback=initMap" async defer>
+    	            </script>
+	            </div>
             </div>
         </div>
         <div class="footer">

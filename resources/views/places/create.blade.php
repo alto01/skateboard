@@ -19,14 +19,6 @@
                     <h2>名前</h2>
                     <input type="text" name="place[name]"　placeholder="名前">
                 </div>
-                <div class='place_prefecture'>
-                    <h2>県名</h2>
-                    <select name="place_prefecture">                          
-                        @foreach($prefectures as $prefecture)
-                            <option value="{{ $prefecture->name }}">{{ $prefecture->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
                 <div class='place_adress'>
                     <h2>住所</h2>
                      <input type="text" name="place[adress]" placeholder="住所">

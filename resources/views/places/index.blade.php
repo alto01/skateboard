@@ -13,15 +13,22 @@
     </head>
     <body>
         <div>
-            <form action="/places/serch" method="GET">
+            <form action="/places/serchKeyword" method="GET">
                 <input type="text" name="keyword" >
                 <input type="submit" value="検索">
             </form>
             
-            <form action="/places/serch" method="GET">
-                <select name="keyword">                          
+            <form action="/places/serchPrefecture" method="GET">
+                <select name="keyword[prefecture]"> 
+                    <option value="" selected disabled>選択してください</option>
                     @foreach($prefectures as $prefecture)
                         <option value="{{ $prefecture->name }}">{{ $prefecture->name }}</option>
+                    @endforeach
+                </select>
+                <select name="keyword[tag]">          
+                    <option value="" selected disabled>選択してください</option>
+                    @foreach($tags as $tag)
+                        <option value="{{ $tag->name }}">{{ $tag->name }}</option>
                     @endforeach
                 </select>
                 <input type="submit" value="検索">

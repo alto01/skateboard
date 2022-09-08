@@ -59,5 +59,8 @@ class User extends Authenticatable
         return $this->belongsToMany('App\User', 'relationships', 'follower_id', 'followed_id');
     }
 
-
+    public function relationship()
+    {
+        return $this->hasMany('App\Relationship');
+    }
 }
