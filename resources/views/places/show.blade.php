@@ -24,8 +24,9 @@
                 <p>{{$place->updated_at}}</p>
                 <div id="map" style="height:500px"> 
                     <script src="{{ asset('/js/map_result.js') }}"></script> 
-                    <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyDDbD9frOed-MhwtpaBxeDIvtCvGA2wVBo&callback=initMap" async defer>
+                    <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key={{config('services.google.key')}}&callback=initMap" async defer>
     	            </script>
+    	 
 	            </div>
             </div>
         </div>
