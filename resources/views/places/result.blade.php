@@ -10,12 +10,13 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-        <h1>Blog Name</h1>
-     
+
+            <h1>検索結果</h1>
+      
         <div class='posts'>
             @foreach ($places as $place)
                 <div class='place'>
-                    <p class='prefecture'>{{$place->prefecture}}</p>
+                    <p class='prefecture'>{{$place->prefecture->name}}</p>
                     <a href="/places/{{ $place->id }}">{{$place->name}}</a>
                     <p class='adress'>{{$place->adress}}</p>
                     @if($place->image != null)

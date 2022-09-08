@@ -16,9 +16,9 @@ class CreateRelationshipsTable extends Migration
         Schema::create('relationships', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedBigInteger('followed_id')->index();
-            $table->unsignedBigInteger('follower_id')->index();
+            $table->unsignedBigInteger('following_id')->index();
             $table->foreign('followed_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('follower_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('following_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

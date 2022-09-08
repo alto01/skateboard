@@ -14,23 +14,29 @@
         
     </head>
     <body>
-        
-        <p class="edit">[<a href="/users/{{ $user->id }}/edit">edit</a>]</p>
-        @if(auth()->user()->id !== $user->id)
-        
-        <follow-component
-        :user-id = "{{ json_encode($user->id) }}"
-        :default-Followed = "{{ json_encode($defaultFollowed) }}"
-        :default-Followed-Count = "{{ json_encode($defaultFollowedCount) }}"
-        :default-Follower-Count = "{{ json_encode($defaultFollowerCount) }}"
-        ></follow-component>
-        @endif
+
         <div class="content">
+            @if(auth()->user()->id === $user->id)
+                <p class="edit">[<a href="/users/{{ $user->id }}/edit">edit</a>]</p>
+            @endif
             <div class="profile">
                 <div class='user_name'>
                     <h2>ユーザーネーム</h2>
                     <h3>{{$user->name}}</h3>
+ 
+                    @if(auth()->user()->id !== $user->id)
+                        <follow-component
+                        :user-id = "{{ json_encode($user->id) }}"
+                        :default-Followed = "{{ json_encode($defaultFollowed) }}"
+                        :default-Followed-Count = "{{ json_encode($defaultFollowedCount) }}"
+                        :default-Follower-Count = "{{ json_encode($defaultFollowerCount) }}"
+                        ></follow-component>
+                    @else
+                       <p>フォロー{{$defaultFollowerCount}}</p>
+                       <p>フォローワー{{$defaultFollowerCount}}</p>
+                    @endif
                 </div>
+                
                 <div class='user_profile'>
                     <h2>プロフィール</h2>
                     <h3>{{$user->profile}}</h3>
