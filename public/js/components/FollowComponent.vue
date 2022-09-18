@@ -1,8 +1,8 @@
 
 <template>
   <div>
-  <span class='ml-5'>{{followerCount}}&emsp;Following</span>
-  <span class='ml-5'>{{followedCount}}&emsp;Followers</span>
+  <span>フー{{ followedCount }} </span>
+  <span>フォロー{{ followerCount }} </span>
     <span class="float-right">
       <button v-if="!followed" type="button" class="btn-sm shadow-none border border-primary p-2" @click="follow(userId)"><i class="mr-1 fas fa-user-plus"></i>フォロー</button>
       <button  v-else type="button" class="btn-sm shadow-none border border-primary p-2 bg-primary text-white" @click="unfollow(userId)"><i class="mr-1 fas fa-user-check"></i>フォロー中</button>

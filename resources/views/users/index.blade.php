@@ -1,82 +1,59 @@
 @extends('layouts.app')　　　　　　　　　　　　　　　　　　
 
 @section('content')
-<!DOCTYPE HTML>
-<html lang="{{ str_replace("_", "-", app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Posts</title>
-        
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <link rel="stylesheet" href="/css/app.css">
-        
-    </head>
-    <body>
 
-        <div class="content">
-            @if(auth()->user()->id === $user->id)
-                <p class="edit">[<a href="/users/{{ $user->id }}/edit">edit</a>]</p>
+
+<div class="content">
+    <div class="card w-50 mb-3" style="margin:auto">
+      <div class="card-body">
+          
+        <h5 class="card-title" style='font-size:2rem'>
+            <img class='icon' src="{{ $user->image}}">
+            {{$user->name}}
+             @if(auth()->user()->id === $user->id)
+                <button type="submit"  class="btn btn-outline-info float-right" onclick="location.href='/users/{{ $user->id }}/edit'">edit</button>
+             @endif
+        </h5>
+        <p class="ml-5" style='font-size:1rem'>{{$user->updated_at}}</p>
+        @if(auth()->user()->id !== $user->id)
+            <follow-component
+            :user-id = "{{ json_encode($user->id) }}"
+            :default-Followed = "{{ json_encode($defaultFollowed) }}"
+            :default-Followed-Count = "{{ json_encode($defaultFollowedCount) }}"
+            :default-Follower-Count = "{{ json_encode($defaultFollowerCount) }}"
+            ></follow-component>
+        @else
+           <span class='ml-5'>{{$defaultFollowerCount}}&emsp;Following</span>
+           <span class='ml-5'>{{$defaultFollowerCount}}&emsp;Followers</span>
+        @endif
+      </div>
+      <ul class="list-group list-group-flush ml-5">
+        <li class="list-group-item" style='font-size:1rem'>{{ $user->profile }}</li>
+      </ul>
+    </div>
+    
+    @foreach ($user->posts as $post)
+       <div class="card w-50 mb-3" style="margin:auto">
+           @if($post->image != null)
+                <img src="{{ $post->image}}" class="card-img-top">
             @endif
-            <div class="profile">
-                <div class='user_name'>
-                    <h2>ユーザーネーム</h2>
-                    <h3>{{$user->name}}</h3>
- 
-                    @if(auth()->user()->id !== $user->id)
-                        <follow-component
-                        :user-id = "{{ json_encode($user->id) }}"
-                        :default-Followed = "{{ json_encode($defaultFollowed) }}"
-                        :default-Followed-Count = "{{ json_encode($defaultFollowedCount) }}"
-                        :default-Follower-Count = "{{ json_encode($defaultFollowerCount) }}"
-                        ></follow-component>
-                    @else
-                       <p>フォロー{{$defaultFollowerCount}}</p>
-                       <p>フォローワー{{$defaultFollowerCount}}</p>
-                    @endif
-                </div>
-                
-                <div class='user_profile'>
-                    <h2>プロフィール</h2>
-                    <h3>{{$user->profile}}</h3>
-                </div>
-                <div class='user_image'>
-                   @if($user->image != null)
-                        <h2>プロフィール画像</h2>
-                        <img src="{{ $user->image}}"　width="300" height="200">
-                    @endif
-                </div>
-               
-
-            </div>
-            <br><br>
-            <div class="posts">
-                <h2>--------投稿一覧---------</h2>
-                @foreach($user->posts as  $post)
-                    <h3>{{$post->body}}</h3>
-                    @if($post->image != null)
-                        <img src="{{ $post->image}}"　width="300" height="200">
-                    @endif
-                    <br><br>
-                @endforeach
-            </div>
-            <br><br>
-            <div class="place">
-                <h2>--------場所投稿---------</h2>
-                @foreach($user->places as  $place)
-                    <h3>{{$place->name}}</h3>
-                    <h3>{{$place->adress}}</h3>
-                    @if($place->image != null)
-                        <img src="{{ $place->image}}"　width="300" height="200">
-                    @endif
-                    <br><br>
-                @endforeach
-            </div>
+          <div class="card-body">
+            <h5 class="card-title" style='font-size:2rem'>
+               <a href="/users/{{ $post->user->id }}"　style="text-decoration:none;color:black" >{{ $post->user->name }}</a>
+               <span class='ml-3' style="font-size:1rem">{{$post->updated_at}}</span>
+            </h5>
+    
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" style='font-size:3rem'><a href="/posts/{{ $post->id }}" style='text-decoration:none; color:black' >{{ $post->body }}</a></li>
+          </ul>
+          <div class="card-body">
+                @if($post->is_liked_by_auth_user())
+                <a href="/posts/{{$post->id}}/unlike" class="btn btn-success btn-sm">いいね<span class="badge">{{ $post->likes->count() }}</span></a>
+                @else
+                <a href="posts/{{$post->id}}/like" class="btn btn-secondary btn-sm">いいね<span class="badge">{{ $post->likes->count() }}</span></a>
+                @endif
+          </div>
         </div>
-        <div class="footer">
-            <a href="/">戻る</a>
-        </div>
-    </body>
-</html>
+    @endforeach
 @endsection

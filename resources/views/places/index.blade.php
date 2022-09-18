@@ -1,44 +1,37 @@
 @extends('layouts.app')　　　　　　　　　　　　　　　　　　
 
 @section('content')
-<!DOCTYPE HTML>
-<html lang="{{ str_replace("_", "-", app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Posts</title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <link rel="stylesheet" href="/css/app.css">
-    </head>
-    <body>
-        <div>
-            <form action="/places/serchKeyword" method="GET">
-                <input type="text" name="keyword" >
-                <input type="submit" value="検索">
-            </form>
-            
-            <form action="/places/serchPrefecture" method="GET">
-                <select name="keyword[prefecture]"> 
-                    <option value="" selected disabled>選択してください</option>
-                    @foreach($prefectures as $prefecture)
-                        <option value="{{ $prefecture->name }}">{{ $prefecture->name }}</option>
-                    @endforeach
-                </select>
-                <select name="keyword[tag]">          
-                    <option value="" selected disabled>選択してください</option>
-                    @foreach($tags as $tag)
-                        <option value="{{ $tag->name }}">{{ $tag->name }}</option>
-                    @endforeach
-                </select>
-                <input type="submit" value="検索">
-            </form>
-            [<a href='/places/create'>create</a>]
-            
-        </div>
-        <div class="footer">
-            <a href="/">戻る</a>
-        </div>
-    </body>
-</html>
+<h1 class='m-5'>Skateboard Parks</h1>
+
+<form class = 'm-5 ' action="/places/serchKeyword" method="GET" >
+    <div class="input-group mb-3 pb-3 col-xs-4">
+        <input type="text" class="form-control" name='keyword' placeholder="キーワードを入力">
+        <button class="btn btn-outline-success" type="submit" id="button-addon2">Search</button>
+    </div>
+</form>
+
+
+<form class="form-inline m-5" action="/places/serchPrefecture" method="GET">
+  <div class="form-group mb-2">
+    <label for="staticEmail2" class="sr-only">Prefecture</label>
+    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="keyword[prefecture]"> 
+        <option value="" selected disabled>選択してください</option>
+        @foreach($prefectures as $prefecture)
+            <option value="{{ $prefecture->name }}">{{ $prefecture->name }}</option>
+        @endforeach
+    </select>
+  </div>
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="inputPassword2" class="sr-only">Tag</label>
+    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="keyword[tag]">          
+        <option value="" selected disabled>選択してください</option>
+        @foreach($tags as $tag)
+            <option value="{{ $tag->name }}">{{ $tag->name }}</option>
+        @endforeach
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary mb-2">Search</button>
+</form>
+
+
 @endsection
