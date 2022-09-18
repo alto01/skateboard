@@ -15,7 +15,7 @@ class AddProfileColumUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('profile', 200)->default('よろしくお願いします。');
-            $table->text('image')->nullable();
+            $table->text('image')->default("https://user-profileicon.s3.ap-northeast-1.amazonaws.com/users_image/6dbei4c2jqlAKTEFbokc1tqPOq4C9Mdq2F7ntcHz.png");
         });
     }
 

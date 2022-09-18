@@ -1,45 +1,33 @@
-<!DOCTYPE HTML>
 @extends('layouts.app')
 
 @section('content')
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <title>Blog</title>
-    </head>
-    <body>
-        <h1>Blog Name</h1>
-       
-    {{--  {{dd(\Auth::user()->id)}} --}}
 
-        <form action="/places/store" method="POST" enctype="multipart/form-data" >
-            @csrf
-            <div class="body">
-                <div class='place_name'>
-                    <h2>名前</h2>
-                    <input type="text" name="place[name]"　placeholder="名前">
-                </div>
-                <div class='place_adress'>
-                    <h2>住所</h2>
-                     <input type="text" name="place[adress]" placeholder="住所">
-                </div>
-                <div class='placce_image'>
-                    <h2>画像</h2>
-                    <input type="file" name="image">
-                </div>
-                <div class='place_tag'>
-                    <h2>タグ</h2>
-                    <select name="place_tag">                          
-                        @foreach($tags as $tag)
-                            <option value="{{ $tag->name }}">{{ $tag->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <input type="hidden" name="place[user_id]" value={{\Auth::user()->id}} />
-            </div>
-            <input type="submit" value="保存"/>
-        </form>
-        <div class="back">[<a href="/">back</a>]</div>
-    </body>
-</html>
+<form class = 'm-5' action="/places/store" method="POST" enctype="multipart/form-data" >
+    @csrf
+  <div class="mb-3 pb-3">
+    <label for="name" class="form-label">Name</label>
+    <input class="form-control" type="text" name="place[name]"　placeholder="Name">
+  </div>
+    <div class="mb-3 pb-3">
+    <label for="adress" class="form-label">Address</label>
+    <input class="form-control" type="text" name="place[adress]"　placeholder="Address">
+  </div>
+  <div class="mb-3 pb-3">
+    <label for="image" class="form-label">Image</label><br>
+    <input type="file"  name="image">
+  </div>
+  <div class="mb-3 pb-3">
+    <label for="tag" class="sr-only">Tag</label>
+    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="place_tag">          
+        <option value="" selected disabled>選択してください</option>
+        @foreach($tags as $tag)
+            <option value="{{ $tag->name }}">{{ $tag->name }}</option>
+        @endforeach
+    </select>
+  </div>
+   
+  <input type="hidden" name="place[user_id]" value={{\Auth::user()->id}} />
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
 @endsection

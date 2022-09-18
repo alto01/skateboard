@@ -1,33 +1,20 @@
-<!DOCTYPE html>
+
 @extends('layouts.app')
 
 @section('content')
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <title>Blog</title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    </head>
-    <body>
 
-            <h1>検索結果</h1>
-      
-        <div class='posts'>
-            @foreach ($places as $place)
-                <div class='place'>
-                    <p class='prefecture'>{{$place->prefecture->name}}</p>
-                    <a href="/places/{{ $place->id }}">{{$place->name}}</a>
-                    <p class='adress'>{{$place->adress}}</p>
-                    @if($place->image != null)
-                        <img src="{{ $place->image}}"　width="300" height="200">
-                    @endif
-                </div>
-            @endforeach
-        </div>
-        <div class="footer">
-            <a href="/">戻る</a>
-        </div>
-    </body>
-</html>
+@foreach ($places as $place)
+   <div class="card w-50 mb-3" style="margin:auto">
+       @if($place->image != null)
+            <img src="{{ $place->image}}" class="card-img-top">
+        @endif
+      <div class="card-body">
+        <h5 class="card-title">Name</h5>
+        <p class="card-text">{{$place->name}}</p>
+        <h5 class="card-title">Address</h5>
+        <p class="card-text">{{$place->adress}}</p>
+        <a href="/places/{{ $place->id }}"class="btn btn-primary">Go somewhere</a></a>
+      </div>
+   </div>
+@endforeach
 @endsection

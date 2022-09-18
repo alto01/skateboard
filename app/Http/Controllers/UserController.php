@@ -40,7 +40,7 @@ class UserController extends Controller
         $image = $request -> file('image');
         
        if ($image != null){
-            $path = Storage::disk('s3')->putFile('posts_image', $image, 'public');
+            $path = Storage::disk('s3')->putFile('users_image', $image, 'public');
             $input_user['image']=Storage::disk('s3')->url($path);
         }
         

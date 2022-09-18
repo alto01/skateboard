@@ -11,8 +11,9 @@ const mix = require('laravel-mix');
  |
  */
 
-// mix.js('resources/js/app.js', 'public/js').vue({ version: 2 })
-//   .sass('resources/sass/app.scss', 'public/css');
+mix.js('resources/js/app.js', 'public/js').vue({ version: 2 })
+  .sass('resources/sass/app.scss', 'public/css');
+
 
 var glob = require("glob");
 const path = require("path");
@@ -23,15 +24,5 @@ glob("resources/assets/css/**/*", (err, files) => {
   css_files.forEach((file) => {
     var name = file.replace("resources/assets/", "public/");
     mix.styles(file, name);
-  });
-});
-
-// 平文Javascript
-glob("resources/assets/js/javascript/**/*", (err, files) => {
-  const js_files = files.filter((x) => x.indexOf(".js") !== -1);
-  js_files.forEach((file) => {
-    var name = file.replace("resources/assets/js/javascript", "public/js");
-    var js_path = path.dirname(name);
-    mix.babel(file, name);
   });
 });

@@ -1,4 +1,5 @@
 {
-    "/css/index.css": "/css/index.css",
-    "/js/map_result.js": "/js/map_result.js"
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/css/index.css": "/css/index.css"
 }
