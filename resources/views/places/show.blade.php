@@ -2,6 +2,7 @@
 
 
 @section('content')
+
 @endsection
 @section('script')
     <script src="{{ asset('/js/map_result.js') }}" ></script> 
@@ -21,6 +22,7 @@
       </ul>
         <div id="map" style="height:500px"> 
            
+
         </div>
     </div>
 
