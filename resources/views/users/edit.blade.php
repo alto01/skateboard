@@ -1,7 +1,7 @@
 @extends('layouts.app')　　　　　　　　　　　　　　　　　　
 
 @section('content')
-<form action="/users/{{$user->id}}/update" method="POST" enctype="multipart/form-data">
+<form class = 'm-5' action="/users/{{$user->id}}/update" method="POST" enctype="multipart/form-data">
      @csrf
      @method('PUT')
   <div class="mb-3">
