@@ -4,14 +4,17 @@
 <h1 class='m-5'>Skateboard Parks</h1>
 
 <form class = 'm-5 ' action="/places/serchKeyword" method="GET" >
-    <div class="input-group mb-3 pb-3 col-xs-4">
-        <input type="text" class="form-control" name='keyword' placeholder="キーワードを入力">
-        <button class="btn btn-outline-success" type="submit" id="button-addon2">Search</button>
+    <div class="col-md-5">
+        <div class="input-group mb-3 pb-3 col-xs-4">
+            <input type="text" class="form-control" name='keyword' placeholder="キーワードを入力">
+            <button class="btn btn-outline-success" type="submit" id="button-addon2">Search</button>
+        </div>
     </div>
 </form>
 
 
 <form class="form-inline m-5" action="/places/serchPrefecture" method="GET">
+    
   <div class="form-group mb-2">
     <label for="staticEmail2" class="sr-only">Prefecture</label>
     <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="keyword[prefecture]"> 
