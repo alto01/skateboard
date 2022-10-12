@@ -34,7 +34,7 @@ Route::post('/places/store','PlaceController@store');
 Route::get('/places/{place}', 'PlaceController@show');
 Route::middleware('auth')->group(function () {
     Route::get('/places/edit','PlaceController@edit')->name('places.edit');
-    Route::delete('/places/{place}','PlaceController@delte')->name('places.delete');
+    Route::delete('/places/{place}','PlaceController@delete')->name('places.delete');
 });
 
 

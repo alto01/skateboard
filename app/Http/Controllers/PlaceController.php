@@ -135,4 +135,10 @@ class PlaceController extends Controller
         
         return redirect ('/places/'.$place->id);
     }
+    
+    public function delete(Place $place)
+    {
+        $place->delete();
+        return redirect('/');
+    }
 }
