@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand navbar-dark blue-gradient">
+
+  <a class="navbar-brand" href="/">Skaters</a>
+
+  <ul class="navbar-nav ml-auto">
+
+    @guest {{--この行を追加--}}
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('register') }}">ユーザー登録</a> {{--この行を変更--}}
+    </li>
+    @endguest {{--この行を追加--}}
+
+    @guest {{--この行を追加--}}
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('login') }}">ログイン</a>
+    </li>
+    @endguest {{--この行を追加--}}
+  
+      
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('places.index') }}"><i class="fas fa-location-dot mr-1"></i>スケートパーク</a>
+    </li>
+
+    
+    @auth {{--この行を追加--}}
+    <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+         aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-pen ">&nbsp;投稿する</i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+        <button class="dropdown-item" type="button"
+                onclick="location.href='{{ route('posts.create') }}'">
+          記事投稿
+        </button>
+        <div class="dropdown-divider"></div>
+        <button class="dropdown-item" type="button"
+                onclick="location.href='{{ route('places.create') }}'">
+          パーク投稿
+        </button>
+      </div>
+    </li>
+    <!-- Dropdown -->
+    @endauth
+    
+    @auth {{--この行を追加--}}
+    <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+         aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-user-circle"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+        <button class="dropdown-item" type="button"
+              onclick="location.href='{{ route("users.show", ["name" => Auth::user()->name]) }}'"> 
+          マイページ
+        </button>
+        <div class="dropdown-divider"></div>
+        <button form="logout-button" class="dropdown-item" type="submit">
+          ログアウト
+        </button>
+      </div>
+    </li>
+    <form id="logout-button" method="POST" action="{{ route('logout') }}"> {{--この行を編集--}}
+      @csrf {{--この行を追加--}}
+    </form>
+    <!-- Dropdown -->
+    @endauth {{--この行を追加--}}
+
+  </ul>
+
+</nav>
