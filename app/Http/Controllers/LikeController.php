@@ -11,25 +11,15 @@ class LikeController extends Controller
      // 引数のIDに紐づく投稿にLIKEする
     public function like($id)
     {
-        Like::create([
-            'post_id' => $id,
-            'user_id' => Auth::id(),
-        ]);
-
-        session()->flash('success', 'You Liked the Post.');
-
-        return redirect()->back();
+        Auth::user()->like($id);
+        return 'ok!'; //レスポンス内容
     }
     
     // 引数のIDに紐づくリプライにUNLIKEする
     public function unlike($id)
     {
-        $like = Like::where('post_id', $id)->where('user_id', Auth::id())->first();
-        $like->delete();
-    
-        session()->flash('success', 'You Unliked the Post.');
-    
-        return redirect()->back();
+        Auth::user()->unlike($id);
+        return 'ok!'; //レスポンス内容
     }
     
 }

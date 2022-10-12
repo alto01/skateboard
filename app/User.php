@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -47,20 +48,39 @@ class User extends Authenticatable
     }
     
     
- // フォロワー→フォロー
-    public function followed()
+    public function followers(): BelongsToMany
     {
-        return $this->belongsToMany('App\User', 'relationships', 'followed_id', 'follower_id');
+        return $this->belongsToMany('App\User', 'relationships', 'followed_id', 'following_id')->withTimestamps();
+    }
+    
+    public function followings(): BelongsToMany
+    {
+        return $this->belongsToMany('App\User', 'relationships', 'following_id', 'followed_id')->withTimestamps();
+    }
+    
+    public function likes(): BelongsToMany
+    {
+        return $this->belongsToMany('App\Post', 'likes')->withTimestamps();
+    }
+    
+    
+    
+    public function isFollowedBy(?User $user): bool
+    {
+        return $user
+            ? (bool)$this->followers->where('id', $user->id)->count()
+            : false;
     }
 
-    // フォロー→フォロワー
-    public function follower()
+    public function getCountFollowersAttribute(): int
     {
-        return $this->belongsToMany('App\User', 'relationships', 'follower_id', 'followed_id');
+        return $this->followers->count();
     }
 
-    public function relationship()
+    public function getCountFollowingsAttribute(): int
     {
-        return $this->hasMany('App\Relationship');
+        return $this->followings->count();
     }
+    
+
 }

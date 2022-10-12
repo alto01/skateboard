@@ -13,24 +13,43 @@
 
 Auth::routes();
 
-Route::get('/', 'PostController@index')->middleware('auth');
-Route::get('/posts/create', 'PostController@create');
-Route::put('/users/{user}/update', 'UserController@update');
-Route::get('/posts/{id}', 'PostController@show');
-Route::get('/users/{id}', 'UserController@index');
-Route::get('/users/{id}/edit', 'UserController@edit');
-Route::post('/posts', 'PostController@store');
-Route::get('/places', 'PlaceController@index');
+//postルーティング
+Route::get('/', 'PostController@index')->name('posts.index');
+Route::resource('/posts', 'PostController')->except(['index','show'])->middleware('auth');
+Route::resource('/posts', 'PostController')->only(['show']);
+Route::delete('/posts/{post}','PostController@delete')->name('posts.delete')->middleware('auth');
+//いいね機能
+Route::prefix('posts')->name('posts.')->group(function () {
+    Route::put('/{post}/like', 'PostController@like')->name('like')->middleware('auth');
+    Route::delete('/{post}/like', 'PostController@unlike')->name('unlike')->middleware('auth');
+});
+
+
+//place関係ルーティング
+Route::get('/places', 'PlaceController@index')->name('places.index');
 Route::get('/places/serchPrefecture','PlaceController@serchPrefecture');
 Route::get('/places/serchKeyword','PlaceController@serchKeyword');
-Route::get('/places/create','PlaceController@create');
+Route::get('/places/create','PlaceController@create')->name('places.create');
 Route::post('/places/store','PlaceController@store');
-Route::get('/posts/{post}/like', 'LikeController@like');
-Route::get('/posts/{post}/unlike', 'LikeController@unlike');
-Route::get('posts/{post}/countfavorites', 'LikeController@count');
 Route::get('/places/{place}', 'PlaceController@show');
-Route::post('/users/{user}/follow', 'RelationshipController@follow');
-Route::post('/users/{user}/unfollow', 'RelationshipController@unfollow');
-Route::delete('/posts/{post}','PostController@delete');
+Route::middleware('auth')->group(function () {
+    Route::get('/places/edit','PlaceController@edit')->name('places.edit');
+    Route::delete('/places/{place}','PlaceController@delte')->name('places.delete');
+});
+
+
+//user関係ルーティング
+Route::prefix('users')->name('users.')->group(function () {
+    Route::get('/{name}', 'UserController@show')->name('show');
+    Route::get('/{name}/likes', 'UserController@likes')->name('likes');
+    Route::get('/{name}/places', 'UserController@places')->name('places');
+    Route::get('/{name}/followings', 'UserController@followings')->name('followings');
+    Route::get('/{name}/followers', 'UserController@followers')->name('followers');
+
+    Route::middleware('auth')->group(function () {
+        Route::put('/{name}/follow', 'UserController@follow')->name('follow');
+        Route::delete('/{name}/follow', 'UserController@unfollow')->name('unfollow');
+    });
+});
 
 

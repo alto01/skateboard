@@ -11,18 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').vue({ version: 2 })
-  .sass('resources/sass/app.scss', 'public/css');
-
-
-var glob = require("glob");
-const path = require("path");
-
-//平文CSS
-glob("resources/assets/css/**/*", (err, files) => {
-  const css_files = files.filter((x) => x.indexOf(".css") !== -1);
-  css_files.forEach((file) => {
-    var name = file.replace("resources/assets/", "public/");
-    mix.styles(file, name);
-  });
-});
+mix.js('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
+    .version(); 

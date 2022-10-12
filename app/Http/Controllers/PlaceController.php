@@ -67,6 +67,7 @@ class PlaceController extends Controller
     
     public function serchKeyword(Request $request)
     {
+        
         $keyword = $request->input('keyword');
         $query = Place::query();
 

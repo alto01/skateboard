@@ -31,30 +31,20 @@ class Post extends Model
   }
    public function likes()
    {
-     return $this->hasMany('App\Like');
+     return $this->belongsToMany('App\User','likes')->withTimestamps();
    }
   
-   /**
-   * リプライにLIKEを付いているかの判定
-   *
-   * @return bool true:Likeがついてる false:Likeがついてない
-   */
-   public function is_liked_by_auth_user()
-   {
-     $id = Auth::id();
-
-     $likers = array();
-     foreach($this->likes as $like) {
-       array_push($likers, $like->user_id);
-     }
-
-     if (in_array($id, $likers)) {
-       return true;
-     } else {
-       return false;
-     }
-   }
-  
+    public function isLikedBy(?User $user): bool
+    {
+        return $user
+            ? (bool)$this->likes->where('id', $user->id)->count()
+            : false;
+    }
+    
+    public function getCountLikesAttribute(): int
+    {
+        return $this->likes->count();
+    }
   
   
 }
