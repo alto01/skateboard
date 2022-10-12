@@ -63,9 +63,9 @@
         @if($post->image != null)
             <img src="{{ $post->image}}" class="card-img-top">
         @endif
-    <div class="card-text">
+    <div class="card-text mt-4">
         <a class="text-dark" href="{{ route('posts.show', ['post' => $post]) }}">
-        {{ $post->body }}
+          <h5 class="card-title">{{ $post->body }}</h5>
         </a>
     </div>
     <div class="card-body pt-0 pb-2 pl-3">
