@@ -133,6 +133,39 @@ class PlaceController extends Controller
        
         $place -> fill($input) -> save();
         
+        return redirect ('/places'.$place->id);
+    }
+    
+    public function edit(Place $place ,Tag $tags){
+        return view('places/edit')->with([
+            'place'=>$place,
+            'tags' => $tags->get()]);
+    }
+    
+    public function update(Request $request,Place $place){
+        
+        $input = $request['place'];
+        $image = $request -> file('image');
+        $tag = $request['place_tag'];
+        
+        if ($image != null){
+            $path = Storage::disk('s3')->putFile('place_image', $image, 'public');
+            $input['image']=Storage::disk('s3')->url($path);
+        }
+        
+         //adressから都道府県を抽出
+        $regex = '/東京都|北海道|(?:京都|大阪)府|.{6,9}県/';
+        preg_match_all($regex, $input["adress"], $matches);
+        //dd($matches[0][0]);
+        
+        $prefecture = Prefecture::whereName($matches)->first();
+        $input['prefecture_id'] = $prefecture->id;
+        
+        $query_tag = Tag::query()->where('name', 'LIKE', "%{$tag}%");
+        $tag = $query_tag->get();
+        $input['tag_id'] = $tag[0]->id;
+        
+        $place -> fill($input) -> save();
         return redirect ('/places/'.$place->id);
     }
     

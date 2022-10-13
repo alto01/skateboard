@@ -76,7 +76,7 @@
 
             <div class="card-body pt-0">
                 @if($place->image != null)
-                    <img src="{{ $places->image}}" class="card-img-top">
+                    <img src="{{ $place->image}}" class="card-img-top">
                 @endif
 
           <ul class="list-group list-group-flush">
