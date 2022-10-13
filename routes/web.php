@@ -30,10 +30,11 @@ Route::get('/places', 'PlaceController@index')->name('places.index');
 Route::get('/places/serchPrefecture','PlaceController@serchPrefecture');
 Route::get('/places/serchKeyword','PlaceController@serchKeyword');
 Route::get('/places/create','PlaceController@create')->name('places.create');
-Route::post('/places/store','PlaceController@store');
+Route::post('/places/store','PlaceController@store')->name('places.store');
 Route::get('/places/{place}', 'PlaceController@show');
 Route::middleware('auth')->group(function () {
-    Route::get('/places/edit','PlaceController@edit')->name('places.edit');
+    Route::put('/places/{place}','PlaceController@update')->name('places.update');
+    Route::get('/places/{place}/edit','PlaceController@edit')->name('places.edit');
     Route::delete('/places/{place}','PlaceController@delete')->name('places.delete');
 });
 
