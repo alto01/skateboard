@@ -133,7 +133,7 @@ class PlaceController extends Controller
        
         $place -> fill($input) -> save();
         
-        return redirect ('/places'.$place->id);
+        return redirect ('/places/'.$place->id);
     }
     
     public function edit(Place $place ,Tag $tags){
