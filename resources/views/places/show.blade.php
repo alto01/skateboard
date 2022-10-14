@@ -80,7 +80,8 @@
                 @endif
 
           <ul class="list-group list-group-flush">
-            <li id='adress' class="list-group-item">{{$place->adress}}</li>
+            <li id='adress' class="list-group-item">住所　：　{{$place->adress}}</li>
+            <li id='adress' class="list-group-item">セクションレベル　：　{{$place->tag->name}}向け</li>
             <li class="list-group-item">投稿者　：　<span class="font-weight-bold　lead">
                 <a href="{{ route('users.show', ['name' => $place->user->name]) }}" class="text-dark">
                   {{$place->user->name}}
