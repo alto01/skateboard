@@ -32,13 +32,22 @@ class PlaceController extends Controller
             $tag=Place::whereHas('tag', function($query) use ($tag){
                 $query ->where('name','LIKE',$tag);
             })->first();
-        
-            $places=Place::wherePrefecture_id($prefecture->prefecture_id)->whereTag_id($tag->tag_id)->get();
             
-            return view('places/result')->with([
-                'keyword' => $input,
-                'places' => $places
-                ]);
+            if(!empty($prefecture) && !empty($tag)){
+                 $places=Place::wherePrefecture_id($prefecture->prefecture_id)->whereTag_id($tag->tag_id)->get();
+                 
+                 return view('places/result')->with([
+                    'keyword' => $input,
+                    'places' => $places
+                    ]);
+            }
+    
+            else{
+        
+                return view('places/nonresult');
+            }
+            
+
                 
         }elseif(!empty($input['prefecture'])){
             $prefecture=$input['prefecture'];
@@ -46,6 +55,11 @@ class PlaceController extends Controller
                 $query ->where('name','LIKE',$prefecture);
             })->get();
             
+            
+            if($places->isEmpty()){
+        
+                return view('places/nonresult');
+            }
             return view('places/result')->with([
                 'keyword' => $input,
                 'places' => $places
@@ -56,6 +70,11 @@ class PlaceController extends Controller
             $places=Place::whereHas('tag', function($query) use ($tag){
                 $query ->where('name','LIKE',$tag);
             })->get();
+            
+            if($places->isEmpty()){
+        
+                return view('places/nonresult');
+            }
             
             return view('places/result')->with([
                 'keyword' => $input,
@@ -93,7 +112,7 @@ class PlaceController extends Controller
                 'keyword' => $keyword,
                 ]);
         }else{
-            return redirect ('/places/');
+            return view('places/nonresult');
         }
     }
     
