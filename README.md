@@ -1,7 +1,6 @@
 # Skaters
-## URL：https://stark-citadel-24466.herokuapp.com/
-<br>
-## テストアカウント
+### URL：https://stark-citadel-24466.herokuapp.com/
+### テストアカウント
 - メールアドレス：user01@gmail.com
 - パスワード　　：testuser01
 <br>
