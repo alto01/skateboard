@@ -12,7 +12,12 @@
           endpoint="{{ route('users.follow', ['name' => $user->name]) }}"
         >
         </follow-button>
+      @else
+        <div class='ml-auto'>
+          <button onclick="location.href='{{ route('users.edit', ['name' => $user->name]) }}'"　class="btn btn-primary mb-2" type="submit" >編集</button>
+        </div>
       @endif
+     
     </div>
     <h2 class="h5 card-title m-0">
       <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">

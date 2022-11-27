@@ -162,7 +162,7 @@ class PlaceController extends Controller
     }
     
     public function update(Request $request,Place $place){
-        
+        dd($request);
         $input = $request['place'];
         $image = $request -> file('image');
         $tag = $request['place_tag'];

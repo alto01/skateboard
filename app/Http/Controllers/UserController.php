@@ -12,11 +12,13 @@ use App\Like;
 
 class UserController extends Controller
 {
-    public function edit($id){
-        $user = User::find($id);
+    public function edit(string $name){
+        $user = User::where('name', $name)->first();
         return view('users/edit')->with(['user' => $user]);
     }
-    public function update(Request $request,User $user){
+    
+    public function update(Request $request,string $name){
+        $user = User::where('name', $name)->first();
         $input_user = $request['user'];
         $image = $request -> file('image');
         
@@ -26,8 +28,8 @@ class UserController extends Controller
         }
         
         $user -> fill($input_user) ->save();
-        
-        return redirect('users/'.$user->id);
+       
+        return redirect('users/'.$user->name);
         
     }
     
@@ -42,6 +44,7 @@ class UserController extends Controller
             'posts' => $posts,
         ]);
     }
+
     
     public function likes(string $name)
     {

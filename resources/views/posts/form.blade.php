@@ -6,6 +6,6 @@
 </div>
 <div class="form-group">
   <label></label>
-    <input type="file"  name="image">
+  <input type="file"  name="image">
 </div>
 <input type="hidden" name="post[user_id]" value={{\Auth::user()->id}} />
